@@ -659,6 +659,46 @@
 
 //10-1. sortinside
 
+// function merge(arr, left, mid, right) {
+//   let sorted = new Array(right - left + 1);
+//   let i = left;
+//   let j = mid + 1;
+//   let k = 0;
+//   while (i <= mid && j <= right) {
+//     if (arr[i] > arr[j]) {
+//       sorted[k++] = arr[i++];
+//     } else {
+//       sorted[k++] = arr[j++];
+//     }
+//   }
+//   while (i <= mid) {
+//     sorted[k++] = arr[i++];
+//   }
+//   while (j <= right) {
+//     sorted[k++] = arr[j++];
+//   }
+//   for (let a = 0; a < sorted.length; a++) {
+//     arr[left + a] = sorted[a];
+//   }
+// }
+
+// function mergeSort(arr, left, right) {
+//   if (left < right) {
+//     let mid = parseInt((left + right) / 2);
+//     mergeSort(arr, left, mid);
+//     mergeSort(arr, mid + 1, right);
+//     merge(arr, left, mid, right);
+//   }
+// }
+
+// let fs = require('fs');
+// let input = fs.readFileSync('/dev/stdin').toString().split('\n');
+
+// let numbers = input[0].split('').map(Number);
+// mergeSort(numbers, 0, numbers.length - 1);
+
+// console.log(numbers.join(''));
+
 function merge(arr, left, mid, right) {
   let sorted = new Array(right - left + 1);
   let i = left;
@@ -681,10 +721,9 @@ function merge(arr, left, mid, right) {
     arr[left + a] = sorted[a];
   }
 }
-
 function mergeSort(arr, left, right) {
   if (left < right) {
-    let mid = parseInt((left + right) / 2);
+    let mid = Math.floor((left + right) / 2);
     mergeSort(arr, left, mid);
     mergeSort(arr, mid + 1, right);
     merge(arr, left, mid, right);
@@ -697,4 +736,8 @@ let input = fs.readFileSync('/dev/stdin').toString().split('\n');
 let numbers = input[0].split('').map(Number);
 mergeSort(numbers, 0, numbers.length - 1);
 
-console.log(numbers.join(''));
+answer = '';
+for (let i = 0; i < numbers.length; i++) {
+  answer += numbers[i];
+}
+console.log(answer);
