@@ -258,28 +258,54 @@
 
 //9.K번째 수
 
+// let fs = require('fs');
+// let input = fs.readFileSync('/dev/stdin').toString().split('\n');
+
+// let N = Number(input[0]);
+// let k = Number(input[1]);
+
+// let start = 1;
+// let end = 10 ** 10;
+
+// let result = 0;
+// while (start <= end) {
+//   let mid = Math.floor((start + end) / 2);
+//   let total = 0;
+//   for (let i = 1; i <= N; i++) {
+//     total += Math.min(parseInt(mid / i), N);
+//   }
+//   if (total >= k) {
+//     end = mid - 1;
+//     result = mid;
+//   } else {
+//     start = mid + 1;
+//   }
+// }
+
+// console.log(result);
+
 let fs = require('fs');
 let input = fs.readFileSync('/dev/stdin').toString().split('\n');
 
-let N = Number(input[0]);
+let n = Number(input[0]);
 let k = Number(input[1]);
 
 let start = 1;
 let end = 10 ** 10;
 
-let result = 0;
+let answer = 0;
 while (start <= end) {
   let mid = Math.floor((start + end) / 2);
   let total = 0;
-  for (let i = 1; i <= N; i++) {
-    total += Math.min(parseInt(mid / i), N);
+  for (let i = 1; i <= n; i++) {
+    total += Math.min(Math.floor(mid / i), n);
   }
   if (total >= k) {
     end = mid - 1;
-    result = mid;
+    answer = mid;
   } else {
     start = mid + 1;
   }
 }
 
-console.log(result);
+console.log(answer);
