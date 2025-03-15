@@ -453,3 +453,54 @@
 
 // dfs(0);
 // console.log(current + '\n' + first);
+
+let rl = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+let input = [];
+rl.on('line', function (line) {
+  input.push(line);
+}).on('close', function () {
+  let n = Number(input[0]);
+  let arr = input[1].split(' ');
+
+  let result = [];
+  let visited = new Array(10).fill(false);
+  let last = '';
+  let first = '';
+  function dfs(depth) {
+    if (depth == n + 1) {
+      let check = true;
+      for (let i = 0; i < n; i++) {
+        if (arr[i] == '<') {
+          if (result[i] > result[i + 1]) check = false;
+        }
+        if (arr[i] == '>') {
+          if (result[i] < result[i + 1]) check = false;
+        }
+      }
+
+      if (check) {
+        last = '';
+        for (let i of result) {
+          last += i + '';
+        }
+        if (first == '') first = last;
+      }
+      return;
+    }
+    for (let i = 0; i < 10; i++) {
+      if (visited[i]) continue;
+      visited[i] = true;
+      result.push(i);
+      dfs(depth + 1);
+      visited[i] = false;
+      result.pop();
+    }
+  }
+
+  dfs(0);
+  console.log(last + '\n' + first);
+});

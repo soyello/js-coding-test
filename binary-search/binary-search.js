@@ -283,29 +283,3 @@
 // }
 
 // console.log(result);
-
-let fs = require('fs');
-let input = fs.readFileSync('/dev/stdin').toString().split('\n');
-
-let n = Number(input[0]);
-let k = Number(input[1]);
-
-let start = 1;
-let end = 10 ** 10;
-
-let answer = 0;
-while (start <= end) {
-  let mid = Math.floor((start + end) / 2);
-  let total = 0;
-  for (let i = 1; i <= n; i++) {
-    total += Math.min(Math.floor(mid / i), n);
-  }
-  if (total >= k) {
-    end = mid - 1;
-    answer = mid;
-  } else {
-    start = mid + 1;
-  }
-}
-
-console.log(answer);
