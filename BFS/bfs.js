@@ -1,26 +1,26 @@
-class Queue {
-  constructor() {
-    this.items = {};
-    this.headIndex = 0;
-    this.tailIndex = 0;
-  }
-  enqueue(item) {
-    this.items[this.tailIndex] = item;
-    this.tailIndex++;
-  }
-  dequeue() {
-    const item = this.items[this.headIndex];
-    delete this.items[this.headIndex];
-    this.headIndex++;
-    return item;
-  }
-  peek() {
-    return this.items[this.headIndex];
-  }
-  getLength() {
-    return this.tailIndex - this.headIndex;
-  }
-}
+// class Queue {
+//   constructor() {
+//     this.items = {};
+//     this.headIndex = 0;
+//     this.tailIndex = 0;
+//   }
+//   enqueue(item) {
+//     this.items[this.tailIndex] = item;
+//     this.tailIndex++;
+//   }
+//   dequeue() {
+//     const item = this.items[this.headIndex];
+//     delete this.items[this.headIndex];
+//     this.headIndex++;
+//     return item;
+//   }
+//   peek() {
+//     return this.items[this.headIndex];
+//   }
+//   getLength() {
+//     return this.tailIndex - this.headIndex;
+//   }
+// }
 
 //1. 숨바꼭질
 
@@ -219,3 +219,140 @@ class Queue {
 // }
 
 // console.log(graph[targetX - 1][targetY - 1]);
+
+class Queue {
+  constructor() {
+    this.items = {};
+    this.head = 0;
+    this.tail = 0;
+  }
+  enque(item) {
+    this.items[this.tail] = item;
+    this.tail++;
+  }
+  deque() {
+    const item = this.items[this.head];
+    delete this.items[this.head];
+    this.head++;
+    return item;
+  }
+  peek() {
+    return this.items[this.head];
+  }
+  getLength() {
+    return this.tail - this.head;
+  }
+}
+
+//6. 특정 거리의 도시 찾기
+
+// let fs = require('fs');
+// let input = fs.readFileSync('/dev/stdin').toString().split('\n');
+
+// let [n, m, k, x] = input[0].split(' ').map(Number);
+// let graph = [];
+// for (let i = 1; i <= n; i++) {
+//   graph[i] = [];
+// }
+// for (let i = 1; i <= m; i++) {
+//   let [a, b] = input[i].split(' ').map(Number);
+//   graph[a].push(b);
+// }
+
+// let distance = new Array(n + 1).fill(-1);
+// distance[x] = 0;
+
+// queue = new Queue();
+// queue.enque(x);
+
+// while (queue.getLength() != 0) {
+//   let now = queue.deque();
+//   for (let i of graph[now]) {
+//     if (distance[i] == -1) {
+//       distance[i] = distance[now] + 1;
+//       queue.enque(i);
+//     }
+//   }
+// }
+
+// let check = false;
+// for (let i = 1; i <= n; i++) {
+//   if (distance[i] == k) {
+//     console.log(i);
+//     check = true;
+//   }
+// }
+
+// if (!check) console.log(-1);
+
+//7. 환승
+
+// let fs = require('fs');
+// let input = fs.readFileSync('/dev/stdin').toString().split('\n');
+
+// let [n, k, m] = input[0].split(' ').map(Number);
+// let graph = [];
+// for (let i = 1; i <= n + m; i++) {
+//   graph[i] = [];
+// }
+// for (let i = 1; i <= m; i++) {
+//   let arr = input[i].split(' ').map(Number);
+//   for (let x of arr) {
+//     graph[x].push(n + i);
+//     graph[n + i].push(x);
+//   }
+// }
+
+// let visited = new Set([1]);
+// queue = new Queue();
+// queue.enque([1, 1]);
+// let found = false;
+// while (queue.getLength() != 0) {
+//   let [now, dist] = queue.deque();
+//   if (now == n) {
+//     console.log(Math.floor(dist / 2) + 1);
+//     found = true;
+//     break;
+//   }
+
+//   for (let x of graph[now]) {
+//     if (!visited.has(x)) {
+//       visited.add(x);
+//       queue.enque([x, dist + 1]);
+//     }
+//   }
+// }
+
+// if (!found) console.log(-1);
+
+//8. 결혼식
+
+let fs = require('fs');
+let input = fs.readFileSync('/dev/stdin').toString().split('\n');
+
+let n = Number(input[0]);
+let m = Number(input[1]);
+let graph = [];
+for (let i = 1; i <= n; i++) {
+  graph[i] = [];
+}
+for (let i = 2; i <= m + 1; i++) {
+  let [a, b] = input[i].split(' ').map(Number);
+  graph[a].push(b);
+  graph[b].push(a);
+}
+
+let visited = new Array(n + 1).fill(-1);
+queue = new Queue();
+queue.enque(1);
+let count = 1;
+while (queue.getLength() != 0) {
+  let now = queue.deque();
+  for (let x of graph[now]) {
+    if (visited[x] == -1) {
+      visited[x] = 1;
+      count += 
+      queue.enque(x);
+    }
+  }
+}
